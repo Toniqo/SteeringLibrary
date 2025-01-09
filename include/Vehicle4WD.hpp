@@ -52,6 +52,9 @@ namespace ab {
          */
         Vehicle4WD(int left, int right, int speed);
 
+        /**
+         * The destructor is virtual so it is destroyed correctly
+         */
         virtual ~Vehicle4WD();
 
         /**
@@ -84,7 +87,7 @@ namespace ab {
         /**
          * The same as driveForward(), but backwards
          */
-        void driveBackward(int duration);
+        void driveBackwards(int duration);
 
         /**
          * Stop the vehicle
@@ -104,5 +107,7 @@ namespace ab {
          * The same as turnLeft() but right
          */
         virtual void turnRight(int turn);
+
+        void makeSquare(int lr, int duration);
     };
 }

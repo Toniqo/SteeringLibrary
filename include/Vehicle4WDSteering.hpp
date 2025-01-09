@@ -36,5 +36,7 @@ namespace ab {
          * The same as function turnLeft() but right
          */
         void turnRight(int turn) override;
+
+        void makeCircle(int lr, int duration);
     };
 }
