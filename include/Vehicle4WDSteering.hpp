@@ -37,6 +37,10 @@ namespace ab {
          */
         void turnRight(int turn) override;
 
+        /**
+         * Makes circle figure 0 - left, 1 - right
+         * duration means how long the arc will be
+         */
         void makeCircle(int lr, int duration);
     };
 }

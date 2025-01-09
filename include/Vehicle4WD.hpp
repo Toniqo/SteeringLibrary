@@ -108,6 +108,10 @@ namespace ab {
          */
         virtual void turnRight(int turn);
 
+        /**
+         * Makes square figure 0 - left, 1 - right
+         * duration means how long the side will be
+         */
         void makeSquare(int lr, int duration);
     };
 }
