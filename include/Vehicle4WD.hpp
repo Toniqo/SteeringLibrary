@@ -10,6 +10,12 @@
 #include "esp_rom_gpio.h"
 #include "soc/gpio_sig_map.h"
 
+/**
+ * define pins used for LED, motors and servos
+ * MOTOR_IN1 and MOTOR_IN2 control right wheels
+ * MOTOR_IN3 and MOTOR_IN4 control left wheels
+ * one GPIO pin controls 2 servos
+ */
 constexpr gpio_num_t LED_PIN = GPIO_NUM_2;
 
 constexpr gpio_num_t MOTOR_IN1_PIN = GPIO_NUM_26;
@@ -35,28 +41,68 @@ namespace ab {
         void rightWheelsDirection(int dir);
 
     public:
+        /**
+         * Default constructor
+         */
         Vehicle4WD();
+        /**
+         * Constructor that takes direction of left and right
+         * wheels and speed
+         * 0 - stop, 1 - forward, 2 - backward
+         */
         Vehicle4WD(int left, int right, int speed);
 
         virtual ~Vehicle4WD();
 
+        /**
+         * Setting speed of vehicle
+         * the range is 0-100 but recommended range is 40-100
+         */
         void setSpeed(int speed);
 
+        /**
+         * Get the resolution of PWM signal that is running motors and servos
+         */
         int getPwmResolution() const;
 
+        /**
+         * Get current set speed of the vehicle
+         */
         int getSpeed() const;
 
+        /**
+         * Get vector of 2 elements that are the rotating directions of left and right wheels
+         */
         std::vector<int> getDirection() const;
 
-        //car1.driveForward(duration) 0 == infinite drive
+        /**
+         * Set the duration of driving forward in milliseconds
+         * when 0 is passed the drive is infinite
+         */
         void driveForward(int duration);
 
+        /**
+         * The same as driveForward(), but backwards
+         */
         void driveBackward(int duration);
 
+        /**
+         * Stop the vehicle
+         */
         void stop();
-        //car1.turnLeft(angle/percentage) 0 == infinite turn
+
+        /**
+         * Set the duration of turning left (tank like) in milliseconds
+         * when 0 is passed the turn is infinite
+         * 
+         * These turn functions are virtual so the turning can be implemented in more traditional way
+         * in the Vehicle4WDSteering class
+         */
         virtual void turnLeft(int turn);
 
+        /**
+         * The same as turnLeft() but right
+         */
         virtual void turnRight(int turn);
     };
 }
